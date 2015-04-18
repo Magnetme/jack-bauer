@@ -1,0 +1,27 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+#  adminConnectors:
+#    - type: http
+#      port: 8081
+
+database:
+  driverClass: org.h2.Driver
+  url: jdbc:h2:./target/service
+  user: service
+  password: service
+
+logging:
+  level: INFO
+  loggers:
+    org.hibernate: WARN
+  appenders:
+    - type: console
+    - type: file
+      threshold: DEBUG
+      logFormat: "%d{dd MMM HH:mm:ss.SSS} [%thread] %-5level %logger{36} (%L) - %msg%n"
+      currentLogFilename: logs/service.log
+      archivedLogFilenamePattern: logs/service-%d{yyyy-MM-dd}.log
+      archivedFileCount: 7
+      timeZone: UTC
