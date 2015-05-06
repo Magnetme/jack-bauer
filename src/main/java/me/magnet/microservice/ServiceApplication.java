@@ -1,22 +1,30 @@
 package me.magnet.microservice;
 
+import java.util.Optional;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import com.google.inject.Injector;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import me.magnet.microservice.StateUpdater.Factory;
 
 public class ServiceApplication extends Application<ServiceConfiguration> {
 
-	// TODO: Rename this to "magnet-<your-service-name>"
-	private static final String NAME = "magnet-service";
+	private static final String NAME = "jack-bauer";
+	private static final String REPO_NAME = "Magnetme/magnet.me";
 
 	public static void main(String[] args) throws Exception {
 		new ServiceApplication().run(args);
 	}
 
+	private GuiceBundle<ServiceConfiguration> guiceBundle;
+
 	@Override
 	public void initialize(Bootstrap<ServiceConfiguration> bootstrap) {
-		GuiceBundle<ServiceConfiguration> guiceBundle = GuiceBundle.<ServiceConfiguration>newBuilder()
+		this.guiceBundle = GuiceBundle.<ServiceConfiguration>newBuilder()
 				.addModule(new ServiceModule())
 				.enableAutoConfig(getClass().getPackage().getName())
 				.setConfigClass(ServiceConfiguration.class)
@@ -32,6 +40,11 @@ public class ServiceApplication extends Application<ServiceConfiguration> {
 
 	@Override
 	public void run(ServiceConfiguration dispatcherConfiguration, Environment environment) throws Exception {
-		// Do nothing...
+		Injector injector = guiceBundle.getInjector();
+
+		ScheduledExecutorService executorService = injector.getInstance(ScheduledExecutorService.class);
+		Factory factory = injector.getInstance(Factory.class);
+
+		executorService.scheduleAtFixedRate(factory.create(REPO_NAME, Optional.empty()), 0, 1, TimeUnit.HOURS);
 	}
 }

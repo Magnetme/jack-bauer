@@ -1,16 +1,14 @@
 FROM docker.magnet.me/magnet-java
 
-MAINTAINER Alex Kolpa "https://github.com/AlexKolpa"
+MAINTAINER Michael de Jong "https://github.com/michaeldejong"
 
-ADD target/magnet-microservice.jar /opt/magnet-microservice/magnet-microservice.jar
-ADD docker_fixtures/entry.sh /opt/magnet-microservice/entry.sh
-ADD config.yml /opt/magnet-microservice/config.yml
+ADD target/jack-bauer.jar /opt/jack-bauer/jack-bauer.jar
+ADD config.yml /opt/jack-bauer/config.yml
 
-VOLUME ['/opt/magnet-microservice/logs']
+VOLUME ['/opt/jack-bauer/logs']
 
-WORKDIR /opt/magnet-microservice
+WORKDIR /opt/jack-bauer
 
 EXPOSE 8080
-EXPOSE 8081
 
 ENTRYPOINT bash entry.sh
