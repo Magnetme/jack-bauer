@@ -1,7 +1,6 @@
 package me.magnet.microservice;
 
 import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
@@ -22,15 +21,9 @@ public class ServiceModule extends AbstractModule {
 
 		bind(ScheduledExecutorService.class).toInstance(new ScheduledThreadPoolExecutor(1));
 
-		Properties properties = loadProperties();
-		String gitHubToken = properties.getProperty("token");
+		String gitHubToken = System.getenv("GITHUB_TOKEN");
 		GitHub gitHub = GitHub.connectUsingOAuth(gitHubToken);
 		bind(GitHub.class).toInstance(gitHub);
 	}
 
-	private Properties loadProperties() throws IOException {
-		Properties properties = new Properties();
-		properties.load(getClass().getResourceAsStream("/github.properties"));
-		return properties;
-	}
 }
