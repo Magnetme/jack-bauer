@@ -1,4 +1,4 @@
-package me.magnet.microservice;
+package me.magnet.jack.bauer;
 
 import io.dropwizard.Configuration;
 import lombok.Data;

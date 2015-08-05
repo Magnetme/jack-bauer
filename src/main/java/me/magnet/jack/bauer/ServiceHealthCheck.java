@@ -1,4 +1,4 @@
-package me.magnet.microservice;
+package me.magnet.jack.bauer;
 
 import com.hubspot.dropwizard.guice.InjectableHealthCheck;
 

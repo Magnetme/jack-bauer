@@ -1,4 +1,4 @@
-package me.magnet.microservice;
+package me.magnet.jack.bauer;
 
 import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
@@ -9,7 +9,7 @@ import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import me.magnet.microservice.StateUpdater.Factory;
+import me.magnet.jack.bauer.StateUpdater.Factory;
 
 public class ServiceApplication extends Application<ServiceConfiguration> {
 

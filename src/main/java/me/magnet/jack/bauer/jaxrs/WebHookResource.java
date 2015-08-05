@@ -1,4 +1,4 @@
-package me.magnet.microservice.jaxrs;
+package me.magnet.jack.bauer.jaxrs;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
 import lombok.Data;
-import me.magnet.microservice.StateUpdater.Factory;
+import me.magnet.jack.bauer.StateUpdater.Factory;
 
 @RequestScoped
 @Path("github-webhook")
